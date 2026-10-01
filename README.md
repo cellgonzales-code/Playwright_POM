@@ -26,6 +26,8 @@ The test suite covers key user workflows including login, product validation, pr
 
 ## Project Structure
 
+## Project Structure
+
 ```text
 Playwright_POM/
 │
