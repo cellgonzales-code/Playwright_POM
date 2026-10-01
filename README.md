@@ -26,32 +26,35 @@ The test suite covers key user workflows including login, product validation, pr
 
 ## Project Structure
 
+```text
 Playwright_POM/
 │
-├── pages/
-│ ├── LoginPage.js
-│ ├── InventoryPage.js
-│ ├── ProductDetailsPage.js
-│ ├── CartPage.js
-│ ├── CheckoutPage.js
-│ └── CheckoutCompletePage.js
+├── pages/                       # Page Object Model classes
+│   ├── LoginPage.js
+│   ├── InventoryPage.js
+│   ├── ProductDetailsPage.js
+│   ├── CartPage.js
+│   ├── CheckoutPage.js
+│   └── CheckoutCompletePage.js
 │
-├── test-data/
-│ └── testData.js
+├── test-data/                   # Test data
+│   └── testData.js
 │
-├── tests/
-│ ├── login.spec.js
-│ ├── inventory.spec.js
-│ ├── cart.spec.js
-│ └── checkout.spec.js
+├── tests/                       # Test scenarios
+│   ├── login.spec.js
+│   ├── inventory.spec.js
+│   ├── cart.spec.js
+│   └── checkout.spec.js
 │
 ├── .github/
-│ └── workflows/
-│ └── playwright.yml
+│   └── workflows/               # CI/CD configuration
+│       └── playwright.yml
 │
-├── playwright.config.js
-├── package.json
-└── README.md
+├── playwright.config.js         # Playwright configuration
+├── package.json                 # Project dependencies and scripts
+└── README.md                    # Project documentation
+```
+
 
 ## Folder Description
 - pages/ – Contains Page Object classes and locators for each application page.
