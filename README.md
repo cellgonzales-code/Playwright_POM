@@ -72,9 +72,8 @@ Install the project dependencies:
 npm install
 ```
 
-Install the project dependencies: 
+Install Playwright browsers:
 ```bash
-npm install
 npx playwright install
 ```
 
