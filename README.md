@@ -67,20 +67,25 @@ Playwright_POM/
 
 ## Installation
 
-Install the project dependencies: npm install
-Install Playwright browsers: npx playwright install
+Install the project dependencies: 
+npm install
+Install Playwright browsers: 
+npx playwright install
 
 ## Run Tests
 
-Run the complete test suite: npx playwright test
+Run the complete test suite: 
+npx playwright test
 
 ## Run Headed
 
-Run tests with the browser visible: npx playwright test --headed
+Run tests with the browser visible: 
+npx playwright test --headed
 
 ## View Report
 
-After a test run, generate and view the Playwright HTML report: npx playwright show-report
+After a test run, generate and view the Playwright HTML report: 
+npx playwright show-report
 
 ## CI/CD
 
