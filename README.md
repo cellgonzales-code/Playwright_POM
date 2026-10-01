@@ -71,11 +71,10 @@ Install the project dependencies:
 ```bash
 npm install
 ```
-Install Playwright browsers: 
+
 Install the project dependencies: 
 ```bash
 npm install
-```bash
 npx playwright install
 ```
 
