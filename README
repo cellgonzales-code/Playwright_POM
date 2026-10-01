@@ -1,0 +1,50 @@
+# Playwright POM Automation Framework
+
+Playwright automation framework using JavaScript and Page Object Model (POM)
+for testing Sauce Demo.
+
+## Tech Stack
+
+- Playwright
+- JavaScript
+- Node.js
+- GitHub Actions
+
+## Coverage
+
+### UI Testing
+- Login
+- Product validation
+- Product sorting
+- Cart
+- Checkout
+- Checkout validation
+- Order completion
+
+### API Testing
+- ...
+
+## Project Structure
+
+pages/
+test-data/
+tests/
+.github/workflows/
+playwright.config.js
+
+## Installation
+
+npm install
+npx playwright install
+
+## Run Tests
+
+npx playwright test
+
+## Run Headed
+
+npx playwright test --headed
+
+## View Report
+
+npx playwright show-report
