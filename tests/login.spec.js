@@ -17,32 +17,32 @@ test('Valid Login', async ({ page }) => {
   await expect(page.locator('.title')).toContainText('Products');
 });
 
-test('Invalid Username', async ({ page }) => {
+test('Invalid Username', async () => {
   await Login.login('test', testData.users.standardUser.password);
   await expect(Login.login_error).toContainText('Epic sadface: Username and password do not match any user in this service');
 });
 
-test('Invalid Password', async ({ page }) => {
+test('Invalid Password', async () => {
   await Login.login(testData.users.standardUser.username, 'test');
   await expect(Login.login_error).toContainText('Epic sadface: Username and password do not match any user in this service');
 });
 
-test('Invalid Username & Password', async ({ page }) => {
+test('Invalid Username & Password', async () => {
   await Login.login('test', 'test');
   await expect(Login.login_error).toContainText('Epic sadface: Username and password do not match any user in this service');
 });
 
-test('Empty Username', async ({ page }) => {
+test('Empty Username', async () => {
   await Login.login('', testData.users.standardUser.password);
   await expect(Login.login_error).toContainText('Epic sadface: Username is required');
 });
 
-test('Empty Password', async ({ page }) => {
+test('Empty Password', async () => {
   await Login.login(testData.users.standardUser.username, '');
   await expect(Login.login_error).toContainText('Epic sadface: Password is required');
 });
 
-test('User is locked out', async ({ page }) => {
+test('User is locked out', async () => {
   await Login.login(testData.users.lockedOutUser.username, testData.users.lockedOutUser.password);
   await expect(Login.login_error).toContainText('Epic sadface: Sorry, this user has been locked out.');
 });

@@ -19,7 +19,7 @@ test.beforeEach(async ({ page }) => {
         testData.users.standardUser.username,
         testData.users.standardUser.password
     );
-    await page.waitForURL('**/inventory.html');
+    await page.waitForURL('/inventory.html');
 });
 
 test('Validate checkout with valid information', async ({ page }) => {
@@ -52,6 +52,7 @@ test('Validate checkout with valid information', async ({ page }) => {
 })
 
 test('Validate checkout with multiple randomly selected products', async ({ page }) => {
+    await expect(inventoryPage.products.first()).toBeVisible();
     const selectedProducts = await inventoryPage.addRandomProductsToCart(3);
     const expectedProductCount = selectedProducts.length;
     const cartCount = await cartPage.cartLink.textContent();

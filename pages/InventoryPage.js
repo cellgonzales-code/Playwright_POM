@@ -20,6 +20,8 @@ export class InventoryPage {
 
     async selectViaProductNameRandomly() {
         const products = await this.products.all();
+        console.log('URL:', this.page.url());
+        console.log('Products found:', products.length);
 
         const shuffledProducts = [...products];
         for (let i = shuffledProducts.length - 1; i > 0; i--) {
@@ -38,7 +40,14 @@ export class InventoryPage {
     }
 
     async addRandomProductsToCart(numberOfProducts) {
+        console.log('URL inside addRandomProductsToCart:', this.page.url());
+        console.log(
+            'Inventory items inside method:',
+            await this.page.locator('[data-test="inventory-item"]').count()
+        );
         const products = await this.products.all();
+        console.log('Products found by this.products:', products.length);
+
         if (numberOfProducts > products.length) {
             throw new Error(`Requested number of products (${numberOfProducts}) exceeds available products (${products.length}).`);
         };
@@ -60,7 +69,8 @@ export class InventoryPage {
     }
 
     async openProduct(productName) {
-        await this.productName.filter({ hasText: productName }).click();
+        const product = this.products.filter({ hasText: productName });
+        await product.locator(this.productName).click();
     }
 
     async getProductNames() {

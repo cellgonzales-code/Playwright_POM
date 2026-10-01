@@ -5,7 +5,7 @@ export class CartPage {
         this.inventoryItem = page.locator('[data-test="inventory-item"]');
         this.inventoryItemName = page.locator('[data-test="inventory-item-name"]');
         this.removeBackpackBtn = page.locator('[data-test="remove-sauce-labs-backpack"]');
-        this.removeProductBtn = '[data-test^="remove-sauce-labs-"]';
+        this.removeProductBtn = 'button[data-test^="remove-"]';
         this.continueShopping = page.locator('[data-test="continue-shopping"]');
         this.checkoutBtn = page.locator('[data-test="checkout"]');
     }
@@ -19,6 +19,8 @@ export class CartPage {
     }
 
     async removeRandomProducts(numberOfProducts) {
+        console.log('URL in removeRandomProducts:', this.page.url());
+        console.log('Cart items:', await this.inventoryItem.count());
         const products = await this.inventoryItem.all();
 
         if (numberOfProducts > products.length) {
@@ -40,8 +42,7 @@ export class CartPage {
         const selectedProductNamesTobeRemoved = [];
 
         for (const product of selectedProductsToBeRemoved) {
-            const productName =
-                await product.locator(this.inventoryItemName).textContent();
+            const productName = await product.locator(this.inventoryItemName).textContent();
 
             selectedProductNamesTobeRemoved.push(productName.trim());
 

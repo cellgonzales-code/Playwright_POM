@@ -10,14 +10,16 @@ test.beforeEach(async ({ page }) => {
     Login = new LoginPage(page);
     await Login.gotoLoginPage();
     await Login.login(testData.users.standardUser.username, testData.users.standardUser.password);
+    await expect(page).toHaveURL('/inventory.html');
+
     inventoryPage = new InventoryPage(page);
-    await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
     productDetailsPage = new ProductDetailsPage(page);
 });
 
-test('Validate details for each product are displayed', async () => {
+test('Validate details for each product are displayed', async ({ page }) => {
     for (const productData of Object.values(testData.products)) {
         await inventoryPage.openProduct(productData.name);
+        await expect(page).toHaveURL(/inventory-item\.html\?id=\d+/);
         await expect(productDetailsPage.productName).toHaveText(productData.name);
         await expect(productDetailsPage.productDescription).toHaveText(productData.description);
         await expect(productDetailsPage.productPrice).toHaveText(productData.price);
@@ -28,6 +30,7 @@ test('Validate details for each product are displayed', async () => {
 });
 
 test('Validate randomly selected product via product Name', async () => {
+    await expect(inventoryPage.products.first()).toBeVisible();
     const selectedProductName = await inventoryPage.selectViaProductNameRandomly();
     const productData = Object.values(testData.products).find(product => product.name === selectedProductName);
     expect(productData).toBeDefined();
@@ -38,24 +41,27 @@ test('Validate randomly selected product via product Name', async () => {
 });
 
 test('Validate add to cart via product details page', async () => {
+    await expect(inventoryPage.products.first()).toBeVisible();
     const selectedProductName = await inventoryPage.selectViaProductNameRandomly();
     const productData = Object.values(testData.products).find(product => product.name === selectedProductName);
     expect(productData).toBeDefined();
     await productDetailsPage.addToCart();
-    expect(productDetailsPage.removeFromCartButton).toHaveText('Remove');
+    await expect(productDetailsPage.removeFromCartButton).toHaveText('Remove');
 });
 
 test('Validate remove from cart via product details page', async () => {
+    await expect(inventoryPage.products.first()).toBeVisible();
     const selectedProductName = await inventoryPage.selectViaProductNameRandomly();
     const productData = Object.values(testData.products).find(product => product.name === selectedProductName);
     expect(productData).toBeDefined();
     await productDetailsPage.addToCart();
-    expect(productDetailsPage.removeFromCartButton).toHaveText('Remove');
+    await expect(productDetailsPage.removeFromCartButton).toHaveText('Remove');
     await productDetailsPage.removeFromCart();
-    expect(productDetailsPage.productAddToCartButton).toHaveText('Add to cart');
+    await expect(productDetailsPage.productAddToCartButton).toHaveText('Add to cart');
 });
 
 test('Validate product to have at least 6 products', async () => {
+    await expect(inventoryPage.products.first()).toBeVisible();
     const productCount = await inventoryPage.getProductCount();
     expect(productCount).toBeGreaterThanOrEqual(6);
 });

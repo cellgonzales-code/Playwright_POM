@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }) => {
         testData.users.standardUser.username,
         testData.users.standardUser.password
     );
-    await page.waitForURL('**/inventory.html');
+    await page.waitForURL('/inventory.html');
 });
 
 test('Validate cart link is present', async () => {
@@ -36,7 +36,8 @@ test('Validate added product is present in the cart', async () => {
     await expect(cartPage.inventoryItemName).toHaveText(testData.products.backpack.name);
 });
 
-test('Validate randomly selected products are present in the cart', async () => {
+test('Validate randomly selected products are present in the cart', async ({ page }) => {
+    await expect(inventoryPage.products.first()).toBeVisible();
     const selectedProducts = await inventoryPage.addRandomProductsToCart(3);
     const expectedProductCount = selectedProducts.length;
     const cartCount = await cartPage.cartLink.textContent();
@@ -51,12 +52,14 @@ test('Validate removal of added product is no longer present in the cart', async
     const cartCount = await cartPage.cartLink.textContent();
     expect(cartCount).toBe('1');
     await cartPage.openCart();
-    await expect(cartPage.inventoryItem).toBeVisible();
+    // await expect(cartPage.inventoryItem).toBeVisible();
+    await expect(cartPage.inventoryItem).toHaveCount(1);
     await cartPage.removeBackpackFromCart();
     await expect(cartPage.inventoryItem).toHaveCount(0);
 });
 
 test('Validate randomly selected & removal of products are no longer present in the cart', async () => {
+    await expect(inventoryPage.products.first()).toBeVisible();
     // Add random products to the cart
     const selectedProducts = await inventoryPage.addRandomProductsToCart(3);
     const expectedProductCount = selectedProducts.length;
@@ -84,7 +87,8 @@ test('Validate Continue Shopping button navigates back to inventory page', async
     const cartCount = await cartPage.cartLink.textContent();
     expect(cartCount).toBe('1');
     await cartPage.openCart();
-    await expect(cartPage.inventoryItem).toBeVisible();
+    // await expect(cartPage.inventoryItem).toBeVisible();
+    await expect(cartPage.inventoryItem).toHaveCount(1);
     await cartPage.clickContinueShopping();
     await expect(page).toHaveURL('/inventory.html');
 });
