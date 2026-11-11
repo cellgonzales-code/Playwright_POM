@@ -64,5 +64,16 @@ export const testData = {
       lastName: 'Smith',
       postalCode: '54321'
     }
+  },
+  apiUserCredentials: {
+    id: 1,
+    username: "emilys",
+    password: "emilyspass",
+    email: "emily.johnson@x.dummyjson.com",
+    firstName: "Emily",
+    lastName: "Johnson",
+    gender: "female",
+    image: "https://dummyjson.com/icon/emilys/128",
+    expiresInMins: 30
   }
 }
